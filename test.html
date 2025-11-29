@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Safo Suvlari - Test</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f8fafc;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        h1 {
+            color: #0f172a;
+            margin: 40px 0 20px;
+        }
+        
+        .status {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        .error {
+            background: #fee;
+            color: #c00;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .success {
+            background: #efe;
+            color: #060;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .info {
+            background: #e0f2fe;
+            color: #0369a1;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        code {
+            background: #f1f5f9;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #06b6d4, #3b82f6);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            margin: 10px 10px 10px 0;
+            transition: transform 0.3s;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>💧 Safo Suvlari - Loyiha Holati</h1>
+        
+        <div class="status">
+            <h2>Loyiha Fayllari</h2>
+            <div class="success">
+                ✅ Barcha React komponentlar yaratildi
+            </div>
+            <div class="success">
+                ✅ CSS stillari to'liq yozildi
+            </div>
+            <div class="success">
+                ✅ Context API (Cart, Orders, Theme) tayyor
+            </div>
+        </div>
+        
+        <div class="status">
+            <h2>Muammo</h2>
+            <div class="error">
+                ❌ PowerShell execution policy muammosi: <code>npm run dev</code> ishlamayapti
+            </div>
+            
+            <div class="info">
+                <strong>Yechim:</strong><br>
+                1. CMD (Command Prompt) ni administrator sifatida oching<br>
+                2. Loyiha papkasiga o'ting: <code>cd C:\Users\user\Desktop\SafoSuvlari</code><br>
+                3. Ishga tushiring: <code>npm run dev</code><br><br>
+                
+                Yoki PowerShell uchun:<br>
+                <code>Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser</code>
+            </div>
+        </div>
+        
+        <div class="status">
+            <h2>Loyiha Xususiyatlari</h2>
+            <ul style="line-height: 2; margin-left: 20px;">
+                <li>🎨 Zamonaviy gradient dizayn</li>
+                <li>🌓 Dark/Light mode</li>
+                <li>🏠 Hero section (animated floating cards)</li>
+                <li>📦 Buyurtma tracking (5 bosqichli progress)</li>
+                <li>🛒 Savatcha funksiyasi</li>
+                <li>📱 Responsive dizayn</li>
+                <li>✨ Smooth animatsiyalar</li>
+            </ul>
+        </div>
+        
+        <div class="status">
+            <h2>Keyingi Qadamlar</h2>
+            <p style="margin-bottom: 15px;">
+                Loyihani ishga tushirish uchun quyidagi buyruqlarni bajaring:
+            </p>
+            <a href="#" class="btn" onclick="alert('CMD ni oching va: cd C:\\Users\\user\\Desktop\\SafoSuvlari\\nnpm run dev'); return false;">
+                📋 Buyruqlarni ko'rish
+            </a>
+        </div>
+    </div>
+    
+    <script>
+        console.log('Safo Suvlari loyihasi tayyor!');
+        console.log('Fayllar: src/App.jsx, src/pages/*, src/components/*, src/context/*');
+    </script>
+</body>
+</html>

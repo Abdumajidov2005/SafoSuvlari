@@ -1,11 +1,10 @@
 import { useCart } from '../context/CartContext';
-import { useToast } from '../components/Toast';
+import { useOrders } from '../context/OrderContext';
 import { useState } from 'react';
-import FadeIn from '../components/FadeIn';
 
 const Cart = () => {
   const { cart, updateQuantity, removeFromCart, total, clearCart } = useCart();
-  const { addToast } = useToast();
+  const { createOrder } = useOrders();
   const [showCheckout, setShowCheckout] = useState(false);
 
   if (cart.length === 0) {
@@ -14,13 +13,40 @@ const Cart = () => {
         <div className="container">
           <h1>Savat</h1>
           <div className="empty-cart">
-            <p>🛒 Savatingiz bo'sh</p>
+            <svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <circle cx="9" cy="21" r="1" strokeWidth="1.5"/>
+              <circle cx="20" cy="21" r="1" strokeWidth="1.5"/>
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+            </svg>
+            <p>Savatingiz bo'sh</p>
             <a href="/products" className="btn btn-primary">Xarid qilish</a>
           </div>
         </div>
       </div>
     );
   }
+
+  const handleCheckout = (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    
+    createOrder({
+      items: cart,
+      total,
+      customerName: formData.get('name'),
+      phone: formData.get('phone'),
+      address: formData.get('address'),
+      paymentMethod: formData.get('payment'),
+      notes: formData.get('notes')
+    });
+
+    clearCart();
+    setShowCheckout(false);
+    
+    setTimeout(() => {
+      window.location.href = '/orders';
+    }, 100);
+  };
 
   return (
     <div className="cart-page">
@@ -50,7 +76,9 @@ const Cart = () => {
                   className="btn-remove"
                   onClick={() => removeFromCart(item.id)}
                 >
-                  🗑️
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                  </svg>
                 </button>
               </div>
             </div>
@@ -75,23 +103,18 @@ const Cart = () => {
             <div className="modal-content checkout-modal" onClick={e => e.stopPropagation()}>
               <button className="modal-close" onClick={() => setShowCheckout(false)}>×</button>
               <h2>Buyurtma berish</h2>
-              <form onSubmit={(e) => {
-                e.preventDefault();
-                addToast('Buyurtma qabul qilindi! Tez orada siz bilan bog\'lanamiz.', 'success');
-                clearCart();
-                setShowCheckout(false);
-              }}>
-                <input type="text" placeholder="Ismingiz" required />
-                <input type="tel" placeholder="Telefon raqam" required />
-                <input type="text" placeholder="Manzil" required />
-                <select required>
+              <form onSubmit={handleCheckout}>
+                <input type="text" name="name" placeholder="Ismingiz" required />
+                <input type="tel" name="phone" placeholder="Telefon raqam" required />
+                <input type="text" name="address" placeholder="Manzil" required />
+                <select name="payment" required>
                   <option value="">To'lov turini tanlang</option>
-                  <option value="cash">Naqd pul</option>
-                  <option value="card">Plastik karta</option>
-                  <option value="click">Click</option>
-                  <option value="payme">Payme</option>
+                  <option value="Naqd pul">Naqd pul</option>
+                  <option value="Plastik karta">Plastik karta</option>
+                  <option value="Click">Click</option>
+                  <option value="Payme">Payme</option>
                 </select>
-                <textarea placeholder="Izoh (ixtiyoriy)" rows="3"></textarea>
+                <textarea name="notes" placeholder="Izoh (ixtiyoriy)" rows="3"></textarea>
                 <button type="submit" className="btn btn-primary btn-block">
                   Tasdiqlash ({total.toLocaleString()} so'm)
                 </button>

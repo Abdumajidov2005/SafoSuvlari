@@ -1,15 +1,8 @@
-import { useToast } from '../components/Toast';
-import FadeIn from '../components/FadeIn';
-
 const Contact = () => {
-  const { addToast } = useToast();
-  
   return (
     <div className="contact-page">
       <div className="container">
-        <FadeIn>
-          <h1>Aloqa</h1>
-        </FadeIn>
+        <h1>Aloqa</h1>
         
         <div className="contact-grid">
           <div className="contact-info">
@@ -56,7 +49,7 @@ const Contact = () => {
             <h2>Xabar yuborish</h2>
             <form onSubmit={(e) => {
               e.preventDefault();
-              addToast('Xabaringiz yuborildi! Tez orada javob beramiz.', 'success');
+              alert('Xabaringiz yuborildi! Tez orada javob beramiz.');
               e.target.reset();
             }}>
               <input type="text" placeholder="Ismingiz" required />

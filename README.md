@@ -1,198 +1,189 @@
-# 💧 Safo Suvlari - Zamonaviy E-commerce Platforma
+# 💧 Safo Suvlari - Zamonaviy Suv Yetkazib Berish Platformasi
 
-Toza va sog'lom suv mahsulotlarini sotish uchun zamonaviy veb-ilova.
-
-## 🚀 Texnologiyalar
-
-- **React 19** - Zamonaviy UI kutubxonasi
-- **Vite** - Tez build tool
-- **Context API** - State management
-- **LocalStorage** - Ma'lumotlarni saqlash
-- **CSS3** - Zamonaviy animatsiyalar va effektlar
+Zamonaviy React + Vite texnologiyalari bilan yaratilgan to'liq funksional e-commerce platforma.
 
 ## ✨ Xususiyatlar
 
 ### 🎨 Zamonaviy Dizayn
-- Responsive dizayn (mobil, planshet, desktop)
-- Smooth animatsiyalar va transitions
+- Gradient ranglar va smooth animatsiyalar
 - Glassmorphism effektlari
-- Gradient ranglar va neon glow
-- Custom scrollbar
+- Floating cards va pulse animatsiyalar
+- Professional UI/UX
 
-### 🛠️ Funksionallik
-- **Mahsulotlar sahifasi**: Filterlash va qidiruv
-- **Savat tizimi**: LocalStorage bilan saqlash
-- **Toast notifications**: Real-time xabarlar
-- **Lazy loading**: Rasm va komponentlar uchun
-- **Skeleton loaders**: Yuklash holati
-- **Animated counters**: Statistika uchun
-- **Scroll to top**: Yuqoriga qaytish tugmasi
-- **Progress bar**: Sahifa scroll ko'rsatkichi
+### 🌓 Dark Mode
+- To'liq dark/light mode qo'llab-quvvatlash
+- localStorage bilan saqlanadi
+- Smooth theme transitions
+- Barcha sahifalarda ishlaydi
 
-### 📱 Sahifalar
-1. **Bosh sahifa** - Hero banner, mahsulotlar, aksiyalar
-2. **Mahsulotlar** - Filterlash, qidiruv, batafsil ko'rish
-3. **Savat** - Mahsulotlarni boshqarish, buyurtma berish
-4. **Biz haqimizda** - Kompaniya ma'lumotlari
-5. **Aloqa** - Kontakt forma va xarita
+### 🏠 Asosiy Sahifalar
 
-## 🎯 Zamonaviy Texnologiyalar
+#### Home (Bosh sahifa)
+- Hero section (gradient background, animated cards)
+- Statistika (5000+ mijozlar, 50K+ buyurtmalar)
+- Mashhur mahsulotlar
+- Aksiyalar va chegirmalar
+- Xususiyatlar (features)
+- CTA section
 
-### Hooks
-- `useLocalStorage` - Ma'lumotlarni saqlash
-- `useIntersectionObserver` - Scroll animatsiyalari
-- `useToast` - Xabarlar tizimi
+#### Products (Mahsulotlar)
+- Filterlash (Barchasi, Suvlar, Filtrlar)
+- Mahsulot kartochkalari
+- Savatga qo'shish
+- Modal oyna (batafsil ma'lumot)
 
-### Komponentlar
-- `FadeIn` - Scroll animatsiyasi
-- `AnimatedCounter` - Raqamlarni animatsiya qilish
-- `LazyImage` - Rasmlarni lazy loading
-- `Skeleton` - Loading holati
-- `Toast` - Notification tizimi
-- `ScrollToTop` - Yuqoriga qaytish
-- `ProgressBar` - Scroll progress
-- `SearchBar` - Qidiruv komponenti
+#### Cart (Savatcha)
+- Mahsulotlar ro'yxati
+- Miqdorni o'zgartirish
+- Narxni avtomatik hisoblash
+- Checkout modal
 
-### Animatsiyalar
-- Fade in/out
-- Slide animations
-- Pulse effects
-- Shimmer loading
-- Ripple effects
-- Float animations
-- 3D card hover
-- Typing effect
+#### Orders (Buyurtmalar) - Yandex Go kabi
+- 5 bosqichli progress tracking:
+  1. 📝 Qabul qilindi
+  2. ✓ Tasdiqlandi
+  3. 📦 Tayyorlanmoqda
+  4. 🚚 Kuryerda
+  5. ✓ Yetkazildi
+- Real-time status ko'rsatish
+- Animated delivery icon
+- Buyurtma tafsilotlari
+- Taxminiy yetkazish vaqti
 
-## 📦 O'rnatish
+#### About (Biz haqimizda)
+- Kompaniya tarixi
+- Afzalliklar
+- Jarayon bosqichlari
+- Statistika
 
+#### Contact (Aloqa)
+- Kontakt ma'lumotlari
+- Xabar yuborish formasi
+- Google Maps
+
+## 🚀 Ishga Tushirish
+
+### Usul 1: BAT fayl (Eng oson)
 ```bash
-# Loyihani klonlash
-git clone <repository-url>
-
-# Papkaga kirish
-cd SafoSuvlari
-
-# Paketlarni o'rnatish
-npm install
-
-# Development server
-npm run dev
-
-# Production build
-npm run build
-
-# Preview production
-npm run preview
+start.bat
 ```
+Faqat `start.bat` faylini ikki marta bosing.
 
-## 🌐 Ishga tushirish
-
-Development rejimda:
+### Usul 2: CMD (Command Prompt)
 ```bash
 npm run dev
 ```
 
-Brauzerda ochish: `http://localhost:5173`
+### Usul 3: PowerShell (Agar ruxsat berilgan bo'lsa)
+```powershell
+npm run dev
+```
+
+Loyiha `http://localhost:5173` da ochiladi.
 
 ## 📁 Loyiha Strukturasi
 
 ```
-src/
-├── components/       # Qayta ishlatiladigan komponentlar
-│   ├── Navbar.jsx
-│   ├── Footer.jsx
-│   ├── FadeIn.jsx
-│   ├── Toast.jsx
-│   ├── Skeleton.jsx
-│   ├── ScrollToTop.jsx
-│   ├── ProgressBar.jsx
-│   ├── SearchBar.jsx
-│   ├── AnimatedCounter.jsx
-│   ├── LazyImage.jsx
-│   ├── LoadingSpinner.jsx
-│   └── Badge.jsx
-├── pages/           # Sahifalar
-│   ├── Home.jsx
-│   ├── Products.jsx
-│   ├── Cart.jsx
-│   ├── About.jsx
-│   └── Contact.jsx
-├── context/         # State management
-│   └── CartContext.jsx
-├── hooks/           # Custom hooks
-│   ├── useLocalStorage.js
-│   └── useIntersectionObserver.js
-├── utils/           # Yordamchi funksiyalar
-│   ├── formatters.js
-│   └── validators.js
-├── data/            # Mock ma'lumotlar
-│   └── products.js
-├── App.jsx          # Asosiy komponent
-├── App.css          # Stillar
-└── main.jsx         # Entry point
+SafoSuvlari/
+├── src/
+│   ├── components/        # Qayta ishlatiladigan komponentlar
+│   │   ├── Navbar.jsx    # Navigatsiya (dark mode bilan)
+│   │   └── Footer.jsx    # Footer
+│   ├── context/          # State management
+│   │   ├── CartContext.jsx    # Savatcha
+│   │   ├── OrderContext.jsx   # Buyurtmalar
+│   │   └── ThemeContext.jsx   # Dark/Light mode
+│   ├── pages/            # Sahifalar
+│   │   ├── Home.jsx      # Bosh sahifa
+│   │   ├── Products.jsx  # Mahsulotlar
+│   │   ├── Cart.jsx      # Savatcha
+│   │   ├── Orders.jsx    # Buyurtmalar (tracking)
+│   │   ├── About.jsx     # Biz haqimizda
+│   │   └── Contact.jsx   # Aloqa
+│   ├── data/
+│   │   └── products.js   # Mahsulotlar ma'lumotlari
+│   ├── App.jsx           # Asosiy komponent
+│   ├── App.css           # Asosiy CSS
+│   ├── index.css         # Global CSS + Dark mode
+│   └── main.jsx          # Entry point
+├── index.html
+├── package.json
+├── start.bat             # Oson ishga tushirish
+└── README.md
 ```
+
+## 🎯 Texnologiyalar
+
+- **React 19** - UI library
+- **Vite** - Build tool
+- **Context API** - State management
+- **CSS Variables** - Theming
+- **SVG Icons** - Modern icons
+- **LocalStorage** - Ma'lumotlarni saqlash
 
 ## 🎨 Dizayn Xususiyatlari
 
-### Ranglar
-- Primary: `#0ea5e9` (Sky Blue)
+### Ranglar (Light Mode)
+- Primary: `#06b6d4` (Cyan)
+- Secondary: `#3b82f6` (Blue)
 - Success: `#10b981` (Green)
+- Warning: `#f59e0b` (Amber)
 - Danger: `#ef4444` (Red)
-- Secondary: `#64748b` (Slate)
+
+### Ranglar (Dark Mode)
+- Primary: `#22d3ee` (Light Cyan)
+- Secondary: `#60a5fa` (Light Blue)
+- Background: `#0f172a` (Dark Slate)
 
 ### Animatsiyalar
-- Fade in/out: 0.6s
-- Hover effects: 0.3s
-- Scroll animations: Intersection Observer
-- Counter animations: RequestAnimationFrame
+- Floating cards (hero section)
+- Pulse effect (delivery tracking)
+- Smooth transitions
+- Hover effects
+- Progress bar animations
 
-### Responsive Breakpoints
-- Mobile: < 768px
-- Tablet: 768px - 1024px
-- Desktop: > 1024px
+## 📱 Responsive
 
-## 🔧 Konfiguratsiya
+Loyiha barcha ekran o'lchamlarida ishlaydi:
+- 📱 Mobile (< 480px)
+- 📱 Tablet (< 768px)
+- 💻 Desktop (< 1024px)
+- 🖥️ Large Desktop (> 1024px)
 
-### Vite Config
-```javascript
-// vite.config.js
-export default {
-  plugins: [react()],
-  server: {
-    port: 5173
-  }
-}
+## 🔧 Muammolarni Hal Qilish
+
+### PowerShell Execution Policy
+Agar `npm run dev` ishlamasa:
+
+**CMD dan foydalaning:**
+```bash
+cd C:\Users\user\Desktop\SafoSuvlari
+npm run dev
 ```
 
-## 📝 To-Do
+**Yoki PowerShell ruxsatini o'zgartiring:**
+```powershell
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+```
 
-- [ ] Backend integratsiyasi
-- [ ] User authentication
-- [ ] Payment gateway (Click, Payme)
-- [ ] Admin panel
-- [ ] Order tracking
-- [ ] Email notifications
-- [ ] PWA support
-- [ ] Multi-language support
+### Port band bo'lsa
+Agar 5173 port band bo'lsa, Vite avtomatik boshqa port tanlaydi.
 
-## 🤝 Hissa qo'shish
+## 📝 Keyingi Qadamlar
 
-Pull request'lar qabul qilinadi. Katta o'zgarishlar uchun avval issue oching.
+1. ✅ Backend API integratsiyasi
+2. ✅ Real payment gateway (Click, Payme)
+3. ✅ SMS notification
+4. ✅ Admin panel
+5. ✅ Real-time order tracking
+6. ✅ User authentication
+7. ✅ Order history
+8. ✅ Reviews va ratings
 
-## 📄 Litsenziya
+## 👨‍💻 Ishlab Chiquvchi
 
-MIT
-
-## 👨‍💻 Muallif
-
-Safo Suvlari jamoasi
-
-## 📞 Aloqa
-
-- Email: info@safosuvlari.uz
-- Telefon: +998 90 123 45 67
-- Manzil: Toshkent, O'zbekiston
+Safo Suvlari loyihasi - 2025
 
 ---
 
-**Toza va sog'lom suv - sog'lom hayot!** 💧
+**Loyihani ishga tushiring va sinab ko'ring!** 🚀
