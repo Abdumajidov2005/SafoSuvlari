@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { useOrders } from '../context/OrderContext';
 import { useState } from 'react';
@@ -19,7 +20,7 @@ const Cart = () => {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
             </svg>
             <p>Savatingiz bo'sh</p>
-            <a href="/products" className="btn btn-primary">Xarid qilish</a>
+            <Link to="/products" className="btn btn-primary">Xarid qilish</Link>
           </div>
         </div>
       </div>

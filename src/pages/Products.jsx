@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { products } from '../data/products';
 import { useCart } from '../context/CartContext';
+import AnimatedSection from '../components/AnimatedSection';
 
 const Products = () => {
   const [filter, setFilter] = useState('all');
@@ -20,53 +21,60 @@ const Products = () => {
   return (
     <div className="products-page">
       <div className="container">
-        <h1>Mahsulotlar</h1>
+        <AnimatedSection animation="fade-up">
+          <h1>Mahsulotlar</h1>
+        </AnimatedSection>
         
         {/* Search */}
-        <div className="search-bar">
-          <input
-            type="text"
-            placeholder="🔍 Mahsulot qidirish..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-          />
-        </div>
+        <AnimatedSection animation="fade-up" delay={100}>
+          <div className="search-bar">
+            <input
+              type="text"
+              placeholder="🔍 Mahsulot qidirish..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+          </div>
+        </AnimatedSection>
         
         {/* Filter */}
-        <div className="filter-buttons">
-          <button 
-            className={filter === 'all' ? 'active' : ''} 
-            onClick={() => setFilter('all')}
-          >
-            Barchasi
-          </button>
-          <button 
-            className={filter === 'water' ? 'active' : ''} 
-            onClick={() => setFilter('water')}
-          >
-            💧 Suvlar
-          </button>
-          <button 
-            className={filter === 'filter' ? 'active' : ''} 
-            onClick={() => setFilter('filter')}
-          >
-            🔧 Filtrlar
-          </button>
-        </div>
+        <AnimatedSection animation="fade-up" delay={200}>
+          <div className="filter-buttons">
+            <button 
+              className={filter === 'all' ? 'active' : ''} 
+              onClick={() => setFilter('all')}
+            >
+              Barchasi
+            </button>
+            <button 
+              className={filter === 'water' ? 'active' : ''} 
+              onClick={() => setFilter('water')}
+            >
+              💧 Suvlar
+            </button>
+            <button 
+              className={filter === 'filter' ? 'active' : ''} 
+              onClick={() => setFilter('filter')}
+            >
+              🔧 Filtrlar
+            </button>
+          </div>
+        </AnimatedSection>
 
         {/* Products Grid */}
         <div className="products-grid">
           {filteredProducts.length === 0 ? (
-            <div className="no-results">
+            <AnimatedSection animation="fade-up" className="no-results">
               <svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                 <circle cx="11" cy="11" r="8" strokeWidth="2"/>
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m21 21-4.35-4.35"/>
               </svg>
               <p>Hech narsa topilmadi</p>
-            </div>
+            </AnimatedSection>
           ) : (
-            filteredProducts.map(product => (
-              <div key={product.id} className="product-item">
+            filteredProducts.map((product, index) => (
+              <AnimatedSection key={product.id} animation="scale-in" delay={index * 50}>
+                <div className="product-item">
                 <div className="product-image">
                   <div className="product-icon-bg">
                     <svg width="80" height="80" viewBox="0 0 40 40" fill="none">
@@ -109,7 +117,8 @@ const Products = () => {
                     Savatga
                   </button>
                 </div>
-              </div>
+                </div>
+              </AnimatedSection>
             ))
           )}
         </div>

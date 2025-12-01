@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Safo Suvlari - Minimalistik Dizayn Test</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0066FF;
+            --text-primary: #000000;
+            --text-secondary: #666666;
+            --bg-primary: #FFFFFF;
+            --bg-secondary: #F8F9FA;
+            --border: #E5E7EB;
+            --radius: 16px;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--bg-primary);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 24px;
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            margin-bottom: 16px;
+        }
+
+        h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            margin: 48px 0 24px;
+        }
+
+        .section {
+            margin: 80px 0;
+        }
+
+        /* Card */
+        .card {
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 32px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
+            border-color: var(--primary);
+        }
+
+        /* Button */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #0052CC;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 102, 255, 0.3);
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        /* Grid */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+            margin-top: 32px;
+        }
+
+        /* Badge */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+
+        /* Animation Demo */
+        .animation-demo {
+            background: var(--bg-secondary);
+            padding: 48px;
+            border-radius: var(--radius);
+            text-align: center;
+        }
+
+        .floating-element {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #0066FF, #3385FF);
+            border-radius: 50%;
+            margin: 0 auto;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .pulse-element {
+            width: 100px;
+            height: 100px;
+            background: var(--primary);
+            border-radius: 50%;
+            margin: 0 auto;
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(0, 102, 255, 0.7);
+            }
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 0 0 10px rgba(0, 102, 255, 0);
+            }
+        }
+
+        /* Color Palette */
+        .color-palette {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 16px;
+        }
+
+        .color-box {
+            aspect-ratio: 1;
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .success {
+            color: #10b981;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .info {
+            background: #E0F2FE;
+            color: #0369a1;
+            padding: 16px;
+            border-radius: 8px;
+            margin: 16px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>💧 Safo Suvlari - Minimalistik Dizayn</h1>
+        <p style="color: var(--text-secondary); font-size: 18px;">
+            Apple va Stripe stilida zamonaviy, minimalistik dizayn
+        </p>
+
+        <div class="section">
+            <h2>✅ Dizayn Holati</h2>
+            <div class="success">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+                </svg>
+                Barcha sahifalar minimalistik dizaynga o'tkazildi
+            </div>
+            <div class="success">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+                </svg>
+                Interaktiv animatsiyalar qo'shildi
+            </div>
+            <div class="success">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+                </svg>
+                Dark mode to'liq qo'llab-quvvatlanadi
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🎨 Rang Palitra</h2>
+            <div class="color-palette">
+                <div class="color-box" style="background: #0066FF;">Primary<br>#0066FF</div>
+                <div class="color-box" style="background: #000000;">Text<br>#000000</div>
+                <div class="color-box" style="background: #666666;">Secondary<br>#666666</div>
+                <div class="color-box" style="background: #F8F9FA; color: #000;">Background<br>#F8F9FA</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🎭 Animatsiyalar</h2>
+            <div class="grid">
+                <div class="animation-demo">
+                    <h3 style="margin-bottom: 24px;">Float Animation</h3>
+                    <div class="floating-element"></div>
+                    <p style="margin-top: 24px; color: var(--text-secondary);">Hero sectionda ishlatiladi</p>
+                </div>
+                <div class="animation-demo">
+                    <h3 style="margin-bottom: 24px;">Pulse Animation</h3>
+                    <div class="pulse-element"></div>
+                    <p style="margin-top: 24px; color: var(--text-secondary);">Delivery tracking uchun</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🎯 Komponentlar</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Card Hover Effect</h3>
+                    <p style="color: var(--text-secondary); margin-top: 8px;">
+                        Hover qiling - lift va shadow animatsiyasi
+                    </p>
+                </div>
+                <div class="card">
+                    <h3>Smooth Transition</h3>
+                    <p style="color: var(--text-secondary); margin-top: 8px;">
+                        Cubic-bezier easing function
+                    </p>
+                </div>
+                <div class="card">
+                    <h3>Border Animation</h3>
+                    <p style="color: var(--text-secondary); margin-top: 8px;">
+                        Border color o'zgaradi
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🔘 Tugmalar</h2>
+            <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                <button class="btn btn-primary">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="9" cy="21" r="1"/>
+                        <circle cx="20" cy="21" r="1"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+                    </svg>
+                    Xarid qilish
+                </button>
+                <span class="badge">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+                    </svg>
+                    100% Sifat
+                </span>
+            </div>
+        </div>
+
+        <div class="info">
+            <strong>💡 Loyihani ishga tushirish:</strong><br>
+            <code style="background: white; padding: 4px 8px; border-radius: 4px; margin-top: 8px; display: inline-block;">npm run dev</code>
+            yoki <code style="background: white; padding: 4px 8px; border-radius: 4px;">start.bat</code>
+        </div>
+
+        <div class="section">
+            <h2>📋 Xususiyatlar</h2>
+            <ul style="list-style: none; padding: 0;">
+                <li style="padding: 12px 0; border-bottom: 1px solid var(--border);">✅ Minimalistik va zamonaviy dizayn</li>
+                <li style="padding: 12px 0; border-bottom: 1px solid var(--border);">✅ Interaktiv animatsiyalar (hover, float, pulse)</li>
+                <li style="padding: 12px 0; border-bottom: 1px solid var(--border);">✅ Smooth transitions (cubic-bezier)</li>
+                <li style="padding: 12px 0; border-bottom: 1px solid var(--border);">✅ Dark/Light mode</li>
+                <li style="padding: 12px 0; border-bottom: 1px solid var(--border);">✅ Responsive dizayn</li>
+                <li style="padding: 12px 0; border-bottom: 1px solid var(--border);">✅ Button ripple effect</li>
+                <li style="padding: 12px 0; border-bottom: 1px solid var(--border);">✅ Card lift animations</li>
+                <li style="padding: 12px 0;">✅ Progress bar animations</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
