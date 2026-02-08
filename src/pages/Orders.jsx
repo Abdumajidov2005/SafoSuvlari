@@ -1,17 +1,19 @@
 import { Link } from 'react-router-dom';
 import { useOrders } from '../context/OrderContext';
+import { useLanguage } from '../context/LanguageContext';
 
 const Orders = () => {
   const { orders } = useOrders();
+  const { t } = useLanguage();
 
   const getStatusInfo = (status) => {
     const statuses = {
-      pending: { label: 'Kutilmoqda', color: '#f59e0b', icon: '⏳' },
-      confirmed: { label: 'Tasdiqlandi', color: '#3b82f6', icon: '✓' },
-      preparing: { label: 'Tayyorlanmoqda', color: '#8b5cf6', icon: '📦' },
-      on_delivery: { label: 'Yo\'lda', color: '#06b6d4', icon: '🚚' },
-      delivered: { label: 'Yetkazildi', color: '#10b981', icon: '✓' },
-      cancelled: { label: 'Bekor qilindi', color: '#ef4444', icon: '✕' }
+      pending: { label: t('orders.status.pending'), color: '#f59e0b', icon: '⏳' },
+      confirmed: { label: t('orders.status.confirmed'), color: '#3b82f6', icon: '✓' },
+      preparing: { label: t('orders.status.preparing'), color: '#8b5cf6', icon: '📦' },
+      on_delivery: { label: t('orders.status.on_delivery'), color: '#06b6d4', icon: '🚚' },
+      delivered: { label: t('orders.status.delivered'), color: '#10b981', icon: '✓' },
+      cancelled: { label: t('orders.status.cancelled'), color: '#ef4444', icon: '✕' }
     };
     return statuses[status] || statuses.pending;
   };
@@ -32,13 +34,13 @@ const Orders = () => {
     return (
       <div className="orders-page">
         <div className="container">
-          <h1>Buyurtmalarim</h1>
+          <h1>{t('orders.title')}</h1>
           <div className="empty-orders">
             <svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
             </svg>
-            <p>Hozircha buyurtmalar yo'q</p>
-            <Link to="/products" className="btn btn-primary">Xarid qilish</Link>
+            <p>{t('orders.empty')}</p>
+            <Link to="/products" className="btn btn-primary">{t('orders.shop_now')}</Link>
           </div>
         </div>
       </div>
@@ -48,7 +50,7 @@ const Orders = () => {
   return (
     <div className="orders-page">
       <div className="container">
-        <h1>Buyurtmalarim</h1>
+        <h1>{t('orders.title')}</h1>
 
         <div className="orders-list">
           {orders.map(order => {
@@ -59,7 +61,7 @@ const Orders = () => {
               <div key={order.id} className="order-card">
                 <div className="order-header">
                   <div className="order-id">
-                    <span className="order-label">Buyurtma #</span>
+                    <span className="order-label">{t('orders.label')}</span>
                     <span className="order-number">{order.id}</span>
                   </div>
                   <div className="order-status" style={{ color: statusInfo.color }}>
@@ -83,23 +85,23 @@ const Orders = () => {
                   <div className="progress-steps">
                     <div className={`step ${['pending', 'confirmed', 'preparing', 'on_delivery', 'delivered'].includes(order.status) ? 'active' : ''}`}>
                       <div className="step-icon">📝</div>
-                      <div className="step-label">Qabul qilindi</div>
+                      <div className="step-label">{t('orders.steps.received')}</div>
                     </div>
                     <div className={`step ${['confirmed', 'preparing', 'on_delivery', 'delivered'].includes(order.status) ? 'active' : ''}`}>
                       <div className="step-icon">✓</div>
-                      <div className="step-label">Tasdiqlandi</div>
+                      <div className="step-label">{t('orders.steps.confirmed')}</div>
                     </div>
                     <div className={`step ${['preparing', 'on_delivery', 'delivered'].includes(order.status) ? 'active' : ''}`}>
                       <div className="step-icon">📦</div>
-                      <div className="step-label">Tayyorlanmoqda</div>
+                      <div className="step-label">{t('orders.steps.preparing')}</div>
                     </div>
                     <div className={`step ${['on_delivery', 'delivered'].includes(order.status) ? 'active' : ''}`}>
                       <div className="step-icon">🚚</div>
-                      <div className="step-label">Kuryerda</div>
+                      <div className="step-label">{t('orders.steps.courier')}</div>
                     </div>
                     <div className={`step ${order.status === 'delivered' ? 'active' : ''}`}>
                       <div className="step-icon">✓</div>
-                      <div className="step-label">Yetkazildi</div>
+                      <div className="step-label">{t('orders.steps.delivered')}</div>
                     </div>
                   </div>
                 </div>
@@ -107,7 +109,7 @@ const Orders = () => {
                 {/* Order Details */}
                 <div className="order-details">
                   <div className="order-items">
-                    <h4>Mahsulotlar:</h4>
+                    <h4>{t('orders.products')}:</h4>
                     {order.items.map((item, idx) => (
                       <div key={idx} className="order-item">
                         <span>{item.name} x {item.quantity}</span>
@@ -118,23 +120,23 @@ const Orders = () => {
 
                   <div className="order-info">
                     <div className="info-row">
-                      <span>Mijoz:</span>
+                      <span>{t('orders.customer')}:</span>
                       <strong>{order.customerName}</strong>
                     </div>
                     <div className="info-row">
-                      <span>Telefon:</span>
+                      <span>{t('orders.phone')}:</span>
                       <strong>{order.phone}</strong>
                     </div>
                     <div className="info-row">
-                      <span>Manzil:</span>
+                      <span>{t('orders.address')}:</span>
                       <strong>{order.address}</strong>
                     </div>
                     <div className="info-row">
-                      <span>To'lov:</span>
+                      <span>{t('orders.payment')}:</span>
                       <strong>{order.paymentMethod}</strong>
                     </div>
                     <div className="info-row total">
-                      <span>Jami:</span>
+                      <span>{t('orders.total')}:</span>
                       <strong>{order.total.toLocaleString()} so'm</strong>
                     </div>
                   </div>
@@ -148,8 +150,8 @@ const Orders = () => {
                       </svg>
                     </div>
                     <div className="delivery-text">
-                      <strong>Kuryer yo'lda!</strong>
-                      <p>Taxminiy yetkazish vaqti: {new Date(order.estimatedDelivery).toLocaleTimeString('uz-UZ', { hour: '2-digit', minute: '2-digit' })}</p>
+                      <strong>{t('orders.courier_on_way')}</strong>
+                      <p>{t('orders.estimated_time')}: {new Date(order.estimatedDelivery).toLocaleTimeString('uz-UZ', { hour: '2-digit', minute: '2-digit' })}</p>
                     </div>
                   </div>
                 )}

@@ -1,26 +1,28 @@
 import { Link } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { useOrders } from '../context/OrderContext';
+import { useLanguage } from '../context/LanguageContext';
 import { useState } from 'react';
 
 const Cart = () => {
   const { cart, updateQuantity, removeFromCart, total, clearCart } = useCart();
   const { createOrder } = useOrders();
+  const { t } = useLanguage();
   const [showCheckout, setShowCheckout] = useState(false);
 
   if (cart.length === 0) {
     return (
       <div className="cart-page">
         <div className="container">
-          <h1>Savat</h1>
+          <h1>{t('cart.title')}</h1>
           <div className="empty-cart">
             <svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="currentColor">
               <circle cx="9" cy="21" r="1" strokeWidth="1.5"/>
               <circle cx="20" cy="21" r="1" strokeWidth="1.5"/>
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
             </svg>
-            <p>Savatingiz bo'sh</p>
-            <Link to="/products" className="btn btn-primary">Xarid qilish</Link>
+            <p>{t('cart.empty_title')}</p>
+            <Link to="/products" className="btn btn-primary">{t('cart.shop_now')}</Link>
           </div>
         </div>
       </div>
@@ -52,7 +54,7 @@ const Cart = () => {
   return (
     <div className="cart-page">
       <div className="container">
-        <h1>Savat</h1>
+        <h1>{t('cart.title')}</h1>
         
         <div className="cart-items">
           {cart.map(item => (
@@ -88,14 +90,14 @@ const Cart = () => {
 
         <div className="cart-summary">
           <div className="summary-row">
-            <span>Jami:</span>
+            <span>{t('cart.total')}:</span>
             <strong>{total.toLocaleString()} so'm</strong>
           </div>
           <button 
             className="btn btn-primary btn-block"
             onClick={() => setShowCheckout(true)}
           >
-            Buyurtma berish
+            {t('cart.checkout')}
           </button>
         </div>
 
@@ -103,21 +105,21 @@ const Cart = () => {
           <div className="modal" onClick={() => setShowCheckout(false)}>
             <div className="modal-content checkout-modal" onClick={e => e.stopPropagation()}>
               <button className="modal-close" onClick={() => setShowCheckout(false)}>×</button>
-              <h2>Buyurtma berish</h2>
+              <h2>{t('cart.modal.title')}</h2>
               <form onSubmit={handleCheckout}>
-                <input type="text" name="name" placeholder="Ismingiz" required />
-                <input type="tel" name="phone" placeholder="Telefon raqam" required />
-                <input type="text" name="address" placeholder="Manzil" required />
+                <input type="text" name="name" placeholder={t('cart.modal.name')} required />
+                <input type="tel" name="phone" placeholder={t('cart.modal.phone')} required />
+                <input type="text" name="address" placeholder={t('cart.modal.address')} required />
                 <select name="payment" required>
-                  <option value="">To'lov turini tanlang</option>
-                  <option value="Naqd pul">Naqd pul</option>
-                  <option value="Plastik karta">Plastik karta</option>
-                  <option value="Click">Click</option>
-                  <option value="Payme">Payme</option>
+                  <option value="">{t('cart.modal.payment.placeholder')}</option>
+                  <option value="Naqd pul">{t('cart.modal.payment.cash')}</option>
+                  <option value="Plastik karta">{t('cart.modal.payment.card')}</option>
+                  <option value="Click">{t('cart.modal.payment.click')}</option>
+                  <option value="Payme">{t('cart.modal.payment.payme')}</option>
                 </select>
-                <textarea name="notes" placeholder="Izoh (ixtiyoriy)" rows="3"></textarea>
+                <textarea name="notes" placeholder={t('cart.modal.notes')} rows="3"></textarea>
                 <button type="submit" className="btn btn-primary btn-block">
-                  Tasdiqlash ({total.toLocaleString()} so'm)
+                  {t('cart.modal.confirm')} ({total.toLocaleString()} so'm)
                 </button>
               </form>
             </div>

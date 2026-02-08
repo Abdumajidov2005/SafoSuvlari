@@ -200,3 +200,93 @@ Loyiha `http://localhost:5173` da ochiladi.
 ---
 
 **Minimalistik, zamonaviy va interaktiv!** 🎨✨
+
+
+## 🎉 Yangi Funksiyalar (v2.0)
+
+### ❤️ Wishlist (Sevimlilar)
+- Mahsulotlarni sevimlilarga qo'shish/o'chirish
+- Navbar da sevimlilar soni
+- Alohida Wishlist sahifasi
+- LocalStorage integratsiyasi
+- Sevimlilardan to'g'ridan-to'g'ri savatga qo'shish
+
+### 💬 Live Chat
+- Real-time chat interfeysi
+- Avtomatik javob berish
+- Online status ko'rsatkichi
+- Zamonaviy animatsiyalar
+- Mobil responsive
+
+### 📧 Newsletter
+- Email obuna tizimi
+- Gradient background
+- Muvaffaqiyat xabari
+- Animatsiyali dizayn
+
+## 🛠️ Texnologiyalar
+
+- **React 19** - UI library
+- **React Router DOM** - Routing
+- **Vite** - Build tool
+- **Lucide React** - Icons
+- **Context API** - State management
+- **LocalStorage** - Data persistence
+- **CSS3** - Animations & Styling
+
+## 📦 O'rnatish
+
+```bash
+# Dependencies o'rnatish
+npm install
+
+# Development server
+npm run dev
+
+# Production build
+npm run build
+
+# Preview production build
+npm run preview
+```
+
+## 🌐 Sahifalar
+
+- `/` - Bosh sahifa
+- `/products` - Mahsulotlar
+- `/cart` - Savat
+- `/orders` - Buyurtmalar
+- `/wishlist` - Sevimlilar (YANGI!)
+- `/about` - Biz haqimizda
+- `/contact` - Aloqa
+
+## 📱 Responsive Dizayn
+
+- 💻 Desktop (1200px+)
+- 📱 Tablet (768px - 1024px)
+- 📱 Mobile (< 768px)
+
+## 🎯 Keyingi Qadamlar
+
+- [ ] Product Reviews
+- [ ] Blog Section
+- [ ] User Authentication
+- [ ] Payment Integration (Click, Payme)
+- [ ] Order Tracking
+- [ ] Multi-language Support
+- [ ] Push Notifications
+- [ ] Social Sharing
+
+## 📄 Litsenziya
+
+MIT License
+
+## 👨‍💻 Muallif
+
+Safo Suvlari Development Team
+
+---
+
+**Versiya:** 2.0.0  
+**Sana:** 2026-02-08  
+**Status:** ✅ Production Ready

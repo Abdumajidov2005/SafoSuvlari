@@ -1,7 +1,12 @@
-import { useRef, useEffect, useState } from 'react';
-import { useInView } from '../hooks/useScrollAnimation';
+import { useRef, useEffect, useState } from "react";
+import { useInView } from "../hooks/useScrollAnimation";
 
-const AnimatedSection = ({ children, animation = 'fade-up', delay = 0, className = '' }) => {
+const AnimatedSection = ({
+  children,
+  animation = "fade-up",
+  delay = 0,
+  className = "",
+}) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { threshold: 0.1, once: true });
   const [hasAnimated, setHasAnimated] = useState(false);
@@ -12,12 +17,14 @@ const AnimatedSection = ({ children, animation = 'fade-up', delay = 0, className
     }
   }, [isInView, hasAnimated]);
 
-  const animationClass = hasAnimated ? `animate-${animation}` : 'animate-hidden';
+  const animationClass = hasAnimated
+    ? `animate-${animation}`
+    : "animate-hidden";
   const delayStyle = { animationDelay: `${delay}ms` };
 
   return (
-    <div 
-      ref={ref} 
+    <div
+      ref={ref}
       className={`${animationClass} ${className}`}
       style={delayStyle}
     >
