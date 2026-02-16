@@ -3,6 +3,7 @@ import { ThemeProvider } from "./context/ThemeContext";
 import { CartProvider } from "./context/CartContext";
 import { OrderProvider } from "./context/OrderContext";
 import { WishlistProvider } from "./context/WishlistContext";
+import { AuthProvider } from "./context/AuthContext";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import MouseFollower from "./components/MouseFollower";
@@ -16,8 +17,11 @@ import Orders from "./pages/Orders";
 import Wishlist from "./pages/Wishlist";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
+import ApiTest from "./pages/ApiTest";
 import "./App.css";
 import "./styles/cart-orders.css";
+import "./styles/auth-navbar.css";
+import "./styles/products-api.css";
 
 import { LanguageProvider } from "./context/LanguageContext";
 import PageTransition from "./components/PageTransition";
@@ -26,13 +30,14 @@ function App() {
   return (
     <LanguageProvider>
       <ThemeProvider>
-        <WishlistProvider>
+        <AuthProvider>
           <OrderProvider>
-            <CartProvider>
-              <Router>
-              <ScrollToTop />
-              <div className="app">
-                <MouseFollower />
+            <WishlistProvider>
+              <CartProvider>
+                <Router>
+                <ScrollToTop />
+                <div className="app">
+                  <MouseFollower />
                 <Navbar />
                 <main className="main-content">
                   <PageTransition>
@@ -44,6 +49,7 @@ function App() {
                       <Route path="/wishlist" element={<Wishlist />} />
                       <Route path="/about" element={<About />} />
                       <Route path="/contact" element={<Contact />} />
+                      <Route path="/api-test" element={<ApiTest />} />
                     </Routes>
                   </PageTransition>
                 </main>
@@ -53,8 +59,9 @@ function App() {
               </div>
             </Router>
           </CartProvider>
-        </OrderProvider>
-      </WishlistProvider>
+        </WishlistProvider>
+      </OrderProvider>
+      </AuthProvider>
     </ThemeProvider>
     </LanguageProvider>
   );

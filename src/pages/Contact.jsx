@@ -1,8 +1,50 @@
 import AnimatedSection from '../components/AnimatedSection';
 import { useLanguage } from '../context/LanguageContext';
+import { useState } from 'react';
+import { sendContactMessage } from '../services/contactService';
 
 const Contact = () => {
   const { t } = useLanguage();
+  const [formData, setFormData] = useState({
+    name: '',
+    phone: '',
+    email: '',
+    message: ''
+  });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState(false);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+    setError('');
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setError('');
+    setSuccess(false);
+
+    try {
+      await sendContactMessage(formData);
+      setSuccess(true);
+      setFormData({
+        name: '',
+        phone: '',
+        email: '',
+        message: ''
+      });
+    } catch (err) {
+      setError(err.message || 'Xatolik yuz berdi. Iltimos, qayta urining.');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const contactInfo = [
     {
@@ -118,17 +160,30 @@ const Contact = () => {
               <h2>{t('contact.form.title')}</h2>
               <form 
                 className="contact-form"
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  alert(t('contact.form.success'));
-                  e.target.reset();
-                }}
+                onSubmit={handleSubmit}
               >
+                {/* Success Message */}
+                {success && (
+                  <div className="form-success">
+                    ✅ Xabaringiz muvaffaqiyatli yuborildi! Tez orada siz bilan bog'lanamiz.
+                  </div>
+                )}
+
+                {/* Error Message */}
+                {error && (
+                  <div className="form-error">
+                    ❌ {error}
+                  </div>
+                )}
+
                 <div className="form-group">
                   <label htmlFor="name">{t('contact.form.name')}</label>
                   <input 
                     type="text" 
                     id="name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleInputChange}
                     placeholder={t('contact.form.name_placeholder')}
                     required 
                   />
@@ -139,6 +194,9 @@ const Contact = () => {
                   <input 
                     type="tel" 
                     id="phone"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleInputChange}
                     placeholder="+998 90 123 45 67" 
                     required 
                   />
@@ -149,8 +207,10 @@ const Contact = () => {
                   <input 
                     type="email" 
                     id="email"
-                    placeholder={t('contact.form.email_placeholder')}
-                    required 
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    placeholder={t('contact.form.email_placeholder')} 
                   />
                 </div>
 
@@ -158,17 +218,21 @@ const Contact = () => {
                   <label htmlFor="message">{t('contact.form.message')}</label>
                   <textarea 
                     id="message"
-                    placeholder={t('contact.form.message_placeholder')}
-                    rows="5" 
-                    required
-                  ></textarea>
+                    name="message"
+                    value={formData.message}
+                    onChange={handleInputChange}
+                    placeholder={t('contact.form.message_placeholder')} 
+                    rows="5"
+                    required 
+                  />
                 </div>
 
-                <button type="submit" className="btn btn-primary btn-block btn-large">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
-                  </svg>
-                  {t('contact.form.submit')}
+                <button 
+                  type="submit" 
+                  className="btn btn-primary btn-block btn-large"
+                  disabled={loading}
+                >
+                  {loading ? 'Yuborilmoqda...' : t('contact.form.submit')}
                 </button>
               </form>
             </div>
@@ -213,3 +277,49 @@ const Contact = () => {
 };
 
 export default Contact;
+
+<style>{`
+  .form-success {
+    background: #10b981;
+    color: white;
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    font-weight: 500;
+  }
+
+  .form-error {
+    background: #ef4444;
+    color: white;
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    font-weight: 500;
+  }
+
+  .form-success, .form-error {
+    animation: slideIn 0.3s ease-out;
+  }
+
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  .contact-form input:disabled,
+  .contact-form textarea:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+`}</style>

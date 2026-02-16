@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Test - Safo Suvlari</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        .form-group {
+            margin: 15px 0;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 5px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        .result {
+            margin: 15px 0;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: monospace;
+            white-space: pre-wrap;
+        }
+        .success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        .status {
+            text-align: center;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+        .online {
+            background: #d4edda;
+            color: #155724;
+        }
+        .offline {
+            background: #f8d7da;
+            color: #721c24;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 Safo Suvlari API Test</h1>
+        
+        <div id="apiStatus" class="status">Tekshirilmoqda...</div>
+        
+        <!-- Ro'yxatdan o'tish -->
+        <div class="test-section">
+            <h2>📝 Ro'yxatdan o'tish</h2>
+            <div class="form-group">
+                <label>Email:</label>
+                <input type="email" id="regEmail" placeholder="test@example.com" value="test@example.com">
+            </div>
+            <div class="form-group">
+                <label>To'liq ism:</label>
+                <input type="text" id="regFullName" placeholder="Test User" value="Test User">
+            </div>
+            <div class="form-group">
+                <label>Telefon:</label>
+                <input type="tel" id="regPhone" placeholder="+998901234567" value="+998901234567">
+            </div>
+            <div class="form-group">
+                <label>Parol:</label>
+                <input type="password" id="regPassword" placeholder="password" value="test123456">
+            </div>
+            <button onclick="testRegister()">Ro'yxatdan o'tish</button>
+            <div id="registerResult" class="result" style="display:none;"></div>
+        </div>
+
+        <!-- Tizimga kirish -->
+        <div class="test-section">
+            <h2>🔐 Tizimga kirish</h2>
+            <div class="form-group">
+                <label>Email:</label>
+                <input type="email" id="loginEmail" placeholder="test@example.com" value="test@example.com">
+            </div>
+            <div class="form-group">
+                <label>Parol:</label>
+                <input type="password" id="loginPassword" placeholder="password" value="test123456">
+            </div>
+            <button onclick="testLogin()">Kirish</button>
+            <div id="loginResult" class="result" style="display:none;"></div>
+        </div>
+
+        <!-- Mahsulotlar -->
+        <div class="test-section">
+            <h2>📦 Mahsulotlar</h2>
+            <button onclick="testGetProducts()">Mahsulotlarni olish</button>
+            <button onclick="testGetProduct()">Mahsulotni olish (ID: 1)</button>
+            <div id="productsResult" class="result" style="display:none;"></div>
+        </div>
+
+        <!-- Buyurtma -->
+        <div class="test-section">
+            <h2>🛒 Buyurtma yaratish</h2>
+            <button onclick="testCreateOrder()">Buyurtma yaratish</button>
+            <div id="orderResult" class="result" style="display:none;"></div>
+        </div>
+
+        <!-- Wishlist -->
+        <div class="test-section">
+            <h2>❤️ Wishlist</h2>
+            <button onclick="testGetWishlist()">Wishlistni olish</button>
+            <button onclick="testAddToWishlist()">Wishlistga qo'shish</button>
+            <div id="wishlistResult" class="result" style="display:none;"></div>
+        </div>
+
+        <!-- Aloqa -->
+        <div class="test-section">
+            <h2>📞 Aloqa xabari</h2>
+            <div class="form-group">
+                <label>Ism:</label>
+                <input type="text" id="contactName" placeholder="Test User" value="Test User">
+            </div>
+            <div class="form-group">
+                <label>Email:</label>
+                <input type="email" id="contactEmail" placeholder="test@example.com" value="test@example.com">
+            </div>
+            <div class="form-group">
+                <label>Telefon:</label>
+                <input type="tel" id="contactPhone" placeholder="+998901234567" value="+998901234567">
+            </div>
+            <div class="form-group">
+                <label>Xabar:</label>
+                <textarea id="contactMessage" rows="3" placeholder="Test message">Bu test xabari</textarea>
+            </div>
+            <button onclick="testContact()">Xabar yuborish</button>
+            <div id="contactResult" class="result" style="display:none;"></div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'https://safo.onrender.com/api';
+        let authToken = null;
+
+        // API status tekshiruvi
+        async function checkApiStatus() {
+            try {
+                const response = await fetch('https://safo.onrender.com/health');
+                const data = await response.json();
+                const statusEl = document.getElementById('apiStatus');
+                if (response.ok && data.status === 'healthy') {
+                    statusEl.textContent = '🟢 API Online';
+                    statusEl.className = 'status online';
+                } else {
+                    statusEl.textContent = '🔴 API Offline';
+                    statusEl.className = 'status offline';
+                }
+            } catch (error) {
+                document.getElementById('apiStatus').textContent = '🔴 API Offline';
+                document.getElementById('apiStatus').className = 'status offline';
+            }
+        }
+
+        function showResult(elementId, message, type = 'info') {
+            const element = document.getElementById(elementId);
+            element.textContent = message;
+            element.className = `result ${type}`;
+            element.style.display = 'block';
+        }
+
+        async function testRegister() {
+            const userData = {
+                email: document.getElementById('regEmail').value,
+                full_name: document.getElementById('regFullName').value,
+                phone: document.getElementById('regPhone').value,
+                password: document.getElementById('regPassword').value
+            };
+
+            try {
+                const response = await fetch(`${API_BASE}/auth/register`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(userData)
+                });
+
+                const data = await response.json();
+                
+                if (response.ok) {
+                    showResult('registerResult', `✅ Muvaffaqiyatli ro'yxatdan o'tildi!\n\n${JSON.stringify(data, null, 2)}`, 'success');
+                } else {
+                    showResult('registerResult', `❌ Xatolik: ${data.detail || 'Noma\'lum xatolik'}\n\n${JSON.stringify(data, null, 2)}`, 'error');
+                }
+            } catch (error) {
+                showResult('registerResult', `❌ Xatolik: ${error.message}`, 'error');
+            }
+        }
+
+        async function testLogin() {
+            const loginData = {
+                email: document.getElementById('loginEmail').value,
+                password: document.getElementById('loginPassword').value
+            };
+
+            try {
+                const response = await fetch(`${API_BASE}/auth/login/json`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(loginData)
+                });
+
+                const data = await response.json();
+                
+                if (response.ok) {
+                    authToken = data.access_token;
+                    showResult('loginResult', `✅ Muvaffaqiyatli tizimga kirildi!\n\n${JSON.stringify(data, null, 2)}`, 'success');
+                } else {
+                    showResult('loginResult', `❌ Xatolik: ${data.detail || 'Noma\'lum xatolik'}\n\n${JSON.stringify(data, null, 2)}`, 'error');
+                }
+            } catch (error) {
+                showResult('loginResult', `❌ Xatolik: ${error.message}`, 'error');
+            }
+        }
+
+        async function testGetProducts() {
+            try {
+                const response = await fetch(`${API_BASE}/products/`);
+                const data = await response.json();
+                
+                if (response.ok) {
+                    showResult('productsResult', `✅ Mahsulotlar olindi!\n\n${JSON.stringify(data, null, 2)}`, 'success');
+                } else {
+                    showResult('productsResult', `❌ Xatolik: ${data.detail || 'Noma\'lum xatolik'}`, 'error');
+                }
+            } catch (error) {
+                showResult('productsResult', `❌ Xatolik: ${error.message}`, 'error');
+            }
+        }
+
+        async function testGetProduct() {
+            try {
+                const response = await fetch(`${API_BASE}/products/1`);
+                const data = await response.json();
+                
+                if (response.ok) {
+                    showResult('productsResult', `✅ Mahsulot olindi!\n\n${JSON.stringify(data, null, 2)}`, 'success');
+                } else {
+                    showResult('productsResult', `❌ Xatolik: ${data.detail || 'Noma\'lum xatolik'}`, 'error');
+                }
+            } catch (error) {
+                showResult('productsResult', `❌ Xatolik: ${error.message}`, 'error');
+            }
+        }
+
+        async function testCreateOrder() {
+            if (!authToken) {
+                showResult('orderResult', '❌ Avval tizimga kiring!', 'error');
+                return;
+            }
+
+            const orderData = {
+                customer_name: "Test User",
+                customer_phone: "+998901234567",
+                delivery_address: "Test address",
+                payment_method: "cash",
+                items: [
+                    {
+                        product_id: 1,
+                        quantity: 2
+                    }
+                ]
+            };
+
+            try {
+                const response = await fetch(`${API_BASE}/orders/`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${authToken}`
+                    },
+                    body: JSON.stringify(orderData)
+                });
+
+                const data = await response.json();
+                
+                if (response.ok) {
+                    showResult('orderResult', `✅ Buyurtma yaratildi!\n\n${JSON.stringify(data, null, 2)}`, 'success');
+                } else {
+                    showResult('orderResult', `❌ Xatolik: ${data.detail || 'Noma\'lum xatolik'}\n\n${JSON.stringify(data, null, 2)}`, 'error');
+                }
+            } catch (error) {
+                showResult('orderResult', `❌ Xatolik: ${error.message}`, 'error');
+            }
+        }
+
+        async function testGetWishlist() {
+            if (!authToken) {
+                showResult('wishlistResult', '❌ Avval tizimga kiring!', 'error');
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_BASE}/wishlist/`, {
+                    headers: {
+                        'Authorization': `Bearer ${authToken}`
+                    }
+                });
+
+                const data = await response.json();
+                
+                if (response.ok) {
+                    showResult('wishlistResult', `✅ Wishlist olindi!\n\n${JSON.stringify(data, null, 2)}`, 'success');
+                } else {
+                    showResult('wishlistResult', `❌ Xatolik: ${data.detail || 'Noma\'lum xatolik'}`, 'error');
+                }
+            } catch (error) {
+                showResult('wishlistResult', `❌ Xatolik: ${error.message}`, 'error');
+            }
+        }
+
+        async function testAddToWishlist() {
+            if (!authToken) {
+                showResult('wishlistResult', '❌ Avval tizimga kiring!', 'error');
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_BASE}/wishlist/`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${authToken}`
+                    },
+                    body: JSON.stringify({ product_id: 1 })
+                });
+
+                const data = await response.json();
+                
+                if (response.ok) {
+                    showResult('wishlistResult', `✅ Wishlistga qo'shildi!\n\n${JSON.stringify(data, null, 2)}`, 'success');
+                } else {
+                    showResult('wishlistResult', `❌ Xatolik: ${data.detail || 'Noma\'lum xatolik'}\n\n${JSON.stringify(data, null, 2)}`, 'error');
+                }
+            } catch (error) {
+                showResult('wishlistResult', `❌ Xatolik: ${error.message}`, 'error');
+            }
+        }
+
+        async function testContact() {
+            const contactData = {
+                name: document.getElementById('contactName').value,
+                email: document.getElementById('contactEmail').value,
+                phone: document.getElementById('contactPhone').value,
+                message: document.getElementById('contactMessage').value
+            };
+
+            try {
+                const response = await fetch(`${API_BASE}/contact`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(contactData)
+                });
+
+                const data = await response.json();
+                
+                if (response.ok) {
+                    showResult('contactResult', `✅ Xabar yuborildi!\n\n${JSON.stringify(data, null, 2)}`, 'success');
+                } else {
+                    showResult('contactResult', `❌ Xatolik: ${data.detail || 'Noma\'lum xatolik'}\n\n${JSON.stringify(data, null, 2)}`, 'error');
+                }
+            } catch (error) {
+                showResult('contactResult', `❌ Xatolik: ${error.message}`, 'error');
+            }
+        }
+
+        // Sahifa yuklanganda API statusni tekshirish
+        window.onload = checkApiStatus;
+    </script>
+</body>
+</html>

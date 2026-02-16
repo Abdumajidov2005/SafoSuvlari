@@ -1,10 +1,9 @@
 /* ========== NAVBAR ========== */
 .navbar {
-  position: fixed;
+  position: sticky;
   top: 0;
   left: 0;
-  right: 0;
-  z-index: 1000;
+  /* z-index: 99; */
   background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(24px) saturate(180%);
   -webkit-backdrop-filter: blur(24px) saturate(180%);
@@ -695,7 +694,7 @@ section {
 
 /* ========== PRODUCTS PAGE ========== */
 .products-page {
-  padding: 40px 0 120px;
+  padding-top: 40px;
   min-height: 80vh;
 }
 
@@ -1179,7 +1178,7 @@ section {
 }
 
 .orders-page h1 {
-  font-size: 50px;
+  font-size: 40px;
   font-weight: 600;
   margin-bottom: 48px;
 }
@@ -1425,10 +1424,6 @@ section {
 }
 
 /* ========== ABOUT & CONTACT ========== */
-.about-page,
-.contact-page {
-  padding: 40px 0 120px;
-}
 
 .about-intro {
   text-align: center;
@@ -2028,9 +2023,9 @@ section {
   border-radius: var(--radius);
   padding: 1px;
   background: linear-gradient(135deg, var(--primary), var(--primary-light));
-  -webkit-mask:
+  /* -webkit-mask:
     linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
+    linear-gradient(#fff 0 0); */
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   opacity: 0;
@@ -2283,7 +2278,7 @@ section {
 
 /* ========== CONTACT PAGE - MODERN DESIGN ========== */
 .contact-page {
-  padding: 40px 0 80px;
+  padding: 20px 0 0px;
 }
 
 .contact-hero {
@@ -2294,7 +2289,7 @@ section {
 }
 
 .contact-hero h1 {
-  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-size: clamp(1.5rem, 3vw, 3rem);
   margin-bottom: 24px;
 }
 
@@ -2579,7 +2574,8 @@ section {
 }
 
 @keyframes float {
-  0%, 100% {
+  0%,
+  100% {
     transform: translate(0, 0) rotate(0deg);
   }
   33% {
@@ -3779,7 +3775,6 @@ section {
   background: rgba(239, 68, 68, 0.1);
 }
 
-
 /* ========== INTERACTIVE ELEMENTS ========== */
 
 /* Magnetic Effect */
@@ -3808,16 +3803,22 @@ section {
 }
 
 .glow-on-hover::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 50%;
   left: 50%;
   width: 0;
   height: 0;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(0, 102, 255, 0.3) 0%, transparent 70%);
+  background: radial-gradient(
+    circle,
+    rgba(0, 102, 255, 0.3) 0%,
+    transparent 70%
+  );
   transform: translate(-50%, -50%);
-  transition: width 0.6s, height 0.6s;
+  transition:
+    width 0.6s,
+    height 0.6s;
   pointer-events: none;
   z-index: -1;
 }
@@ -3829,9 +3830,23 @@ section {
 
 /* Shake Animation */
 @keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  10%, 30%, 50%, 70%, 90% { transform: translateX(-2px); }
-  20%, 40%, 60%, 80% { transform: translateX(2px); }
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: translateX(-2px);
+  }
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: translateX(2px);
+  }
 }
 
 .shake-on-hover:hover {
@@ -3893,7 +3908,8 @@ section {
 
 /* Pulse Effect */
 @keyframes pulse-glow {
-  0%, 100% {
+  0%,
+  100% {
     box-shadow: 0 0 0 0 rgba(0, 102, 255, 0.7);
   }
   50% {
@@ -3940,7 +3956,7 @@ section {
 }
 
 .gradient-border::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: -2px;
   background: linear-gradient(
@@ -3978,7 +3994,8 @@ section {
 
 /* Floating Animation */
 @keyframes floating {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0);
   }
   50% {
@@ -3997,11 +4014,15 @@ section {
 }
 
 .cursor-follow::before {
-  content: '';
+  content: "";
   position: absolute;
   width: 100px;
   height: 100px;
-  background: radial-gradient(circle, rgba(0, 102, 255, 0.2) 0%, transparent 70%);
+  background: radial-gradient(
+    circle,
+    rgba(0, 102, 255, 0.2) 0%,
+    transparent 70%
+  );
   border-radius: 50%;
   pointer-events: none;
   opacity: 0;
@@ -4020,7 +4041,7 @@ section {
 }
 
 .btn-interactive::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 50%;
   left: 50%;
@@ -4029,7 +4050,9 @@ section {
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.3);
   transform: translate(-50%, -50%);
-  transition: width 0.6s, height 0.6s;
+  transition:
+    width 0.6s,
+    height 0.6s;
 }
 
 .btn-interactive:hover::before {
@@ -4068,11 +4091,21 @@ section {
   animation: reveal 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
-.stagger-item:nth-child(1) { animation-delay: 0.1s; }
-.stagger-item:nth-child(2) { animation-delay: 0.2s; }
-.stagger-item:nth-child(3) { animation-delay: 0.3s; }
-.stagger-item:nth-child(4) { animation-delay: 0.4s; }
-.stagger-item:nth-child(5) { animation-delay: 0.5s; }
+.stagger-item:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.stagger-item:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.stagger-item:nth-child(3) {
+  animation-delay: 0.3s;
+}
+.stagger-item:nth-child(4) {
+  animation-delay: 0.4s;
+}
+.stagger-item:nth-child(5) {
+  animation-delay: 0.5s;
+}
 
 /* Hover Lift */
 .hover-lift {

@@ -1,10 +1,18 @@
 import { Link } from 'react-router-dom';
 import { useOrders } from '../context/OrderContext';
 import { useLanguage } from '../context/LanguageContext';
+import { useCart } from '../context/CartContext';
+import { useEffect } from 'react';
 
 const Orders = () => {
   const { orders } = useOrders();
   const { t } = useLanguage();
+  const { clearCart } = useCart();
+
+  // Orders page ochilganda cartni tozalash
+  useEffect(() => {
+    clearCart(); // Cartni to'liq bo'sh qilish
+  }, []);
 
   const getStatusInfo = (status) => {
     const statuses = {

@@ -1,20 +1,33 @@
 import { useState } from 'react';
 import { Mail, Check } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
+import { subscribeNewsletter } from '../services/newsletterService';
 
 const Newsletter = () => {
   const [email, setEmail] = useState('');
   const [isSubscribed, setIsSubscribed] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
   const { t } = useLanguage();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (email) {
+    if (!email) return;
+
+    setLoading(true);
+    setError('');
+
+    try {
+      await subscribeNewsletter(email);
       setIsSubscribed(true);
       setTimeout(() => {
         setEmail('');
         setIsSubscribed(false);
       }, 3000);
+    } catch (err) {
+      setError(err.message || 'Xatolik yuz berdi. Iltimos, qayta urining.');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -29,19 +42,31 @@ const Newsletter = () => {
           <p>{t('newsletter.subtitle')}</p>
           
           <form onSubmit={handleSubmit} className="newsletter-form">
+            {/* Error Message */}
+            {error && (
+              <div className="newsletter-error">
+                ❌ {error}
+              </div>
+            )}
+            
             <div className="newsletter-input-wrapper">
               <Mail size={20} className="input-icon" />
               <input
                 type="email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                  setError('');
+                }}
                 placeholder={t('newsletter.placeholder')}
                 required
-                disabled={isSubscribed}
+                disabled={isSubscribed || loading}
               />
             </div>
-            <button type="submit" className="btn btn-primary" disabled={isSubscribed}>
-              {isSubscribed ? (
+            <button type="submit" className="btn btn-primary" disabled={isSubscribed || loading}>
+              {loading ? (
+                'Yuborilmoqda...'
+              ) : isSubscribed ? (
                 <>
                   <Check size={20} />
                   {t('newsletter.success')}
@@ -207,3 +232,27 @@ const Newsletter = () => {
 };
 
 export default Newsletter;
+
+<style>{`
+  .newsletter-error {
+    background: rgba(239, 68, 68, 0.9);
+    color: white;
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    font-weight: 500;
+    font-size: 14px;
+    animation: slideIn 0.3s ease-out;
+  }
+
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+`}</style>

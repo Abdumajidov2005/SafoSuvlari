@@ -18,7 +18,7 @@ export const CartProvider = ({ children }) => {
       if (existing) {
         return prev.map(item =>
           item.id === product.id
-            ? { ...item, quantity: item.quantity + 1 }
+            ? { ...item, quantity : item.quantity + 1 }
             : item
         );
       }
@@ -28,11 +28,23 @@ export const CartProvider = ({ children }) => {
 
   const removeFromCart = (productId) => {
     setCart(prev => prev.filter(item => item.id !== productId));
+    // Mahsulot savatdan o'chirilganda wishlistga qo'shish
+    const removedProduct = prev.find(item => item.id === productId);
+    if (removedProduct) {
+      const { addToWishlist } = useWishlist();
+      addToWishlist(removedProduct);
+    }
   };
 
   const updateQuantity = (productId, quantity) => {
     if (quantity <= 0) {
       removeFromCart(productId);
+      // Mahsulot savatdan to'liq o'chirilganda wishlistga qo'shish
+      const removedProduct = cart.find(item => item.id === productId);
+      if (removedProduct) {
+        const { addToWishlist } = useWishlist();
+        addToWishlist(removedProduct);
+      }
       return;
     }
     setCart(prev =>
@@ -42,7 +54,10 @@ export const CartProvider = ({ children }) => {
     );
   };
 
-  const clearCart = () => setCart([]);
+  const clearCart = () => {
+    // Savatni tozalash - wishlistga qo'shmasdan
+    setCart([]);
+  };
 
   const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
 

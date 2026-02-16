@@ -1,4 +1,20 @@
+import { useEffect, useState } from 'react';
+
 const Toast = ({ message, type = 'success' }) => {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    if (message) {
+      setIsVisible(true);
+      const timer = setTimeout(() => {
+        setIsVisible(false);
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [message]);
+
+  if (!message || !isVisible) return null;
+
   return (
     <div className="toast-container">
       <div className={`toast toast-${type}`}>

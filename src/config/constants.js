@@ -1,5 +1,5 @@
 export const APP_NAME = import.meta.env.VITE_APP_NAME || 'Safo Suvlari';
-export const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000/api';
+export const API_URL = import.meta.env.VITE_API_URL || 'https://safo.onrender.com/api';
 export const CONTACT_EMAIL = import.meta.env.VITE_CONTACT_EMAIL || 'info@safosuvlari.uz';
 export const CONTACT_PHONE = import.meta.env.VITE_CONTACT_PHONE || '+998 90 123 45 67';
 

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { products, services, clients, certifications } from "../data/products";
+import { services, clients, certifications } from "../data/products";
 import { useCart } from "../context/CartContext";
 import { useLanguage } from "../context/LanguageContext";
 import AnimatedSection from "../components/AnimatedSection";
@@ -13,7 +13,34 @@ const Home = () => {
   const { addToCart } = useCart();
   const { t } = useLanguage();
 
-  const newsData = [{ id: 1 }, { id: 2 }, { id: 3 }];
+  const newsData = [
+  {
+    id: 1,
+    title: "Yangi Suv Filtrlash Texnologiyasi",
+    excerpt: "Safo Suvlari endi eng so'nggi avlod filtrlarini o'rnatishni boshladi. Bu texnologiya suvni 99.9% tozalaydi.",
+    category: "Texnologiya",
+  },
+  {
+    id: 2,
+    title: "Korporativ Mijozlar Uchun Aksiya",
+    excerpt: "Ofislar uchun maxsus taklif: 1 yillik shartnoma tuzing va 2 oy bepul xizmat oling. O'tkazib yubormang!",
+    category: "Aksiya",
+  },
+  {
+    id: 3,
+    title: "Ekologik Toza Qadoqlash",
+    excerpt: "Biz tabiatni asrash maqsadida to'liq qayta ishlanadigan qadoqlarga o'tmoqdamiz. Kelajak uchun muhim qadam.",
+    category: "Jamiyat",
+  },
+];
+
+const certificationsData = [
+  { name: "Sifat menejmenti tizimi" },
+  { name: "Oziq-ovqat xavfsizligi" },
+  { name: "Halal sertifikati" },
+  { name: "Yevropa standartlari" },
+  { name: "Xalqaro suv standartlari" },
+];
 
   return (
     <div className="home">
@@ -364,7 +391,7 @@ const Home = () => {
           </AnimatedSection>
 
           <div className="certifications-grid">
-            {certifications.map((cert, index) => (
+            {certificationsData.map((cert, index) => (
               <AnimatedSection
                 key={index}
                 animation="scale-in"
@@ -388,7 +415,7 @@ const Home = () => {
                     </svg>
                   </div>
                   <h4>{cert.name}</h4>
-                  <p>{t(`data.certs.${index + 1}.desc`)}</p>
+                  <p>{cert.name}</p>
                 </div>
               </AnimatedSection>
             ))}
@@ -450,32 +477,34 @@ const Home = () => {
                 <article className="news-card-premium">
                   <div className="news-image">
                     <span className="news-category">
-                      {t(`data.news.${item.id}.category`)}
+                      {item.category}
                     </span>
                   </div>
                   <div className="news-content">
-                    <div className="news-date">
-                      <svg
-                        width="16"
-                        height="16"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                        />
-                      </svg>
-                      {new Date().toLocaleDateString()}
+                    <div className="news-meta">
+                      <span className="news-date">
+                        <svg
+                          width="16"
+                          height="16"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                          />
+                        </svg>
+                        {new Date().toLocaleDateString()}
+                      </span>
                     </div>
                     <h3 className="news-title">
-                      {t(`data.news.${item.id}.title`)}
+                      {item.title}
                     </h3>
                     <p className="news-excerpt">
-                      {t(`data.news.${item.id}.excerpt`)}
+                      {item.excerpt}
                     </p>
                     <a href="#" className="news-link">
                       {t("news_section.read_more")}

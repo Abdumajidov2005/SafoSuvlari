@@ -1,68 +1,90 @@
-export const products = [
-  {
-    id: 1,
-    name: "Premium Suv 5L",
-    category: "water",
-    size: "5L",
-    price: 8000,
-    image: "/water-5l.jpg",
-    description: "Oilaviy iste'mol uchun premium sifatli ichimlik suvi",
-    features: ["5 bosqichli tozalash", "Mineral tarkibi muvozanatlangan", "BPA-free qadoq"],
-    certification: "ISO 9001:2015, HACCP"
-  },
-  {
-    id: 2,
-    name: "Premium Suv 10L",
-    category: "water",
-    size: "10L",
-    price: 15000,
-    image: "/water-10l.jpg",
-    description: "Katta oilalar va kichik ofislar uchun optimal yechim",
-    features: ["Yuqori sifatli tozalash", "Uzoq saqlash muddati", "Ekologik toza"],
-    certification: "ISO 9001:2015, HACCP"
-  },
-  {
-    id: 3,
-    name: "Premium Suv 19L",
-    category: "water",
-    size: "19L",
-    price: 25000,
-    image: "/water-19l.jpg",
-    description: "Korporativ mijozlar va ofislar uchun professional yechim",
-    features: ["Korporativ standartlar", "Muntazam yetkazib berish", "Sifat kafolati"],
-    certification: "ISO 9001:2015, HACCP, Halal"
-  },
-  {
-    id: 4,
-    name: "AquaPro Home System",
-    category: "filter",
-    price: 450000,
-    image: "/filter-home.jpg",
-    description: "Uy uchun professional suv tozalash tizimi",
-    features: ["5 bosqichli tozalash", "Avtomatik tozalash", "3 yillik kafolat"],
-    certification: "CE, RoHS"
-  },
-  {
-    id: 5,
-    name: "AquaPro Business System",
-    category: "filter",
-    price: 850000,
-    image: "/filter-office.jpg",
-    description: "Biznes va ofislar uchun yuqori unumdorlikli tizim",
-    features: ["7 bosqichli tozalash", "Smart monitoring", "5 yillik kafolat"],
-    certification: "CE, RoHS, NSF"
-  },
-  {
-    id: 6,
-    name: "AquaPro Industrial",
-    category: "filter",
-    price: 2500000,
-    image: "/filter-industrial.jpg",
-    description: "Sanoat korxonalari uchun professional yechim",
-    features: ["Industrial grade", "24/7 monitoring", "10 yillik kafolat"],
-    certification: "CE, RoHS, NSF, ISO 14001"
+import { API_URL } from "../config/constants";
+
+export const getProductsData = () => {
+  const requestOptions = {
+    method: "GET",
+    redirect: "follow",
+  };
+
+  return fetch(`${API_URL}/products/`, requestOptions)
+    .then((response) => response.json())
+    .then((result) => {
+      return result;
+    })
+    .catch((error) => {
+      console.error(error);
+      return [];
+    });
+};
+
+export const getProducts = async (params = {}) => {
+  try {
+    const queryString = new URLSearchParams(params).toString();
+    const url = queryString
+      ? `${API_URL}/products/?${queryString}`
+      : `${API_URL}/products/`;
+
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        // Agar token bo'lsa, qo'shamiz
+        ...(localStorage.getItem("token") && {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        }),
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const result = await response.json();
+    console.log("Products from API:", result);
+
+    // API dan kelgan ma'lumotlarni qaytarish
+    return result;
+  } catch (error) {
+    console.error("Error fetching products:", error);
+    throw error;
   }
-];
+};
+
+// Mahsulotlarni kategoriyaga bo'lib olish
+export const getProductsByCategory = async (category) => {
+  return getProducts({ category });
+};
+
+// Mahsulotni ID bo'yicha olish
+export const getProductById = async (id) => {
+  try {
+    const response = await fetch(`${API_URL}/products/${id}/`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        ...(localStorage.getItem("token") && {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        }),
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const result = await response.json();
+    console.log(`Product ${id} from API:`, result);
+    return result;
+  } catch (error) {
+    console.error("Error fetching product:", error);
+    throw error;
+  }
+};
+
+// Mahsulotlarni qidirish
+export const searchProducts = async (query) => {
+  return getProducts({ search: query });
+};
 
 export const promotions = [
   {
@@ -70,22 +92,22 @@ export const promotions = [
     title: "Korporativ Mijozlar uchun Maxsus Chegirma",
     discount: "20%",
     validUntil: "2025-12-31",
-    description: "Oylik 100+ litr buyurtma uchun"
+    description: "Oylik 100+ litr buyurtma uchun",
   },
   {
     id: 2,
     title: "Professional Filtr Tizimi + Bepul O'rnatish",
     discount: "Bepul",
     validUntil: "2025-12-31",
-    description: "Barcha filtr tizimlariga professional o'rnatish"
+    description: "Barcha filtr tizimlariga professional o'rnatish",
   },
   {
     id: 3,
     title: "Yillik Kontrakt - 15% Tejash",
     discount: "15%",
     validUntil: "2025-12-31",
-    description: "Yillik xizmat shartnomasi tuzganlar uchun"
-  }
+    description: "Yillik xizmat shartnomasi tuzganlar uchun",
+  },
 ];
 
 export const services = [
@@ -93,26 +115,26 @@ export const services = [
     id: 1,
     title: "Korporativ Yetkazib Berish",
     description: "Ofis va korxonalar uchun muntazam yetkazib berish xizmati",
-    icon: "truck"
+    icon: "truck",
   },
   {
     id: 2,
     title: "Professional O'rnatish",
     description: "Malakali mutaxassislar tomonidan tizim o'rnatish",
-    icon: "tools"
+    icon: "tools",
   },
   {
     id: 3,
     title: "Texnik Xizmat",
     description: "24/7 texnik qo'llab-quvvatlash va xizmat ko'rsatish",
-    icon: "support"
+    icon: "support",
   },
   {
     id: 4,
     title: "Sifat Nazorati",
     description: "Muntazam laboratoriya testlari va sifat sertifikatlari",
-    icon: "certificate"
-  }
+    icon: "certificate",
+  },
 ];
 
 export const clients = [
@@ -121,7 +143,7 @@ export const clients = [
   { name: "Tashkent City", logo: "/clients/tashkent-city.png" },
   { name: "Humo", logo: "/clients/humo.png" },
   { name: "Uzum", logo: "/clients/uzum.png" },
-  { name: "Alif", logo: "/clients/alif.png" }
+  { name: "Alif", logo: "/clients/alif.png" },
 ];
 
 export const certifications = [
@@ -129,5 +151,5 @@ export const certifications = [
   { name: "HACCP", description: "Oziq-ovqat xavfsizligi" },
   { name: "Halal", description: "Halal sertifikati" },
   { name: "CE", description: "Yevropa standartlari" },
-  { name: "NSF", description: "Xalqaro suv standartlari" }
+  { name: "NSF", description: "Xalqaro suv standartlari" },
 ];
