@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Heart, User, ShoppingCart } from "lucide-react";
+import { Heart, Globe, User, ShoppingCart } from "lucide-react";
 import { useTheme } from "../context/ThemeContext";
 import { useCart } from "../context/CartContext";
 import { useWishlist } from "../context/WishlistContext";
@@ -24,6 +24,14 @@ const Navbar = () => {
   const { language, toggleLanguage, t } = useLanguage();
   const location = useLocation();
   const navigate = useNavigate();
+
+  const languages = {
+    uz: "UZ",
+    ru: "RU",
+    en: "EN",
+  };
+
+  const lang = languages[language] || "UZ";
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 10);
@@ -73,18 +81,21 @@ const Navbar = () => {
             {/* Top Row */}
             <div className="nav-top">
               <Link to="/" className="logo">
-                <div className="logo-icon">
-                  <svg width="36" height="36" viewBox="0 0 30 30" fill="none">
-                    <path
-                      d="M15 2L2 9v12c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V9l-13-7z"
-                      fill="currentColor"
-                    />
-                  </svg>
-                </div>
-                Safo Suvlari
+                <h2> Safo Suvlari</h2>
+                <h2> Safo Suvlari</h2>
               </Link>
 
               <div className="nav-actions">
+                {/* Language Toggle */}
+                <button
+                  className="lang-toggle"
+                  onClick={toggleLanguage}
+                  aria-label="Language toggle"
+                >
+                  <Globe size={16} />
+                  <span>{lang}</span>
+                </button>
+
                 {/* Theme Toggle */}
                 <button
                   className="theme-toggle"
@@ -159,13 +170,11 @@ const Navbar = () => {
                 {/* Account */}
                 {isAuthenticated ? (
                   <button
-                    className="account-icon-btn"
+                    className="account-btn"
                     onClick={() => setShowAccountModal(true)}
                     title="Account"
                   >
-                    <div className="account-avatar">
-                      <User size={18} />
-                    </div>
+                    {user?.full_name?.split(" ")[0] || "User"}
                   </button>
                 ) : null}
 
@@ -199,60 +208,58 @@ const Navbar = () => {
                     </svg>
                   )}
                 </button>
+
+                {!isAuthenticated && (
+                  <div className="auth-buttons">
+                    <button
+                      className="auth-btn login-btn primary-btn"
+                      onClick={() => setShowAuthModal(true)}
+                    >
+                      {t("auth.login")}
+                    </button>
+                    <button
+                      className="auth-btn register-btn secondary-btn"
+                      onClick={() => setShowAuthModal(true)}
+                    >
+                      {t("auth.register")}
+                    </button>
+                  </div>
+                )}
               </div>
             </div>
 
             {/* Bottom Row */}
-            <div className={`nav-bottom ${isMenuOpen ? "open" : ""}`}>
-              <div className={`nav-links ${isMenuOpen ? "active" : ""}`}>
-                <Link
-                  to="/"
-                  className={`nav-link ${location.pathname === "/" ? "active" : ""}`}
-                >
-                  {t("nav.home")}
-                </Link>
-                <Link
-                  to="/products"
-                  className={`nav-link ${location.pathname === "/products" ? "active" : ""}`}
-                >
-                  {t("nav.products")}
-                </Link>
-                <Link
-                  to="/orders"
-                  className={`nav-link ${location.pathname === "/orders" ? "active" : ""}`}
-                >
-                  Buyurtmalar
-                </Link>
-                <Link
-                  to="/about"
-                  className={`nav-link ${location.pathname === "/about" ? "active" : ""}`}
-                >
-                  {t("nav.about")}
-                </Link>
-                <Link
-                  to="/contact"
-                  className={`nav-link ${location.pathname === "/contact" ? "active" : ""}`}
-                >
-                  {t("nav.contact")}
-                </Link>
-              </div>
-
-              {!isAuthenticated && (
-                <div className="auth-buttons">
-                  <button
-                    className="auth-btn login-btn"
-                    onClick={() => setShowAuthModal(true)}
-                  >
-                    Kirish
-                  </button>
-                  <button
-                    className="auth-btn register-btn"
-                    onClick={() => setShowAuthModal(true)}
-                  >
-                    Ro'yxatdan o'tish
-                  </button>
-                </div>
-              )}
+            <div className={`nav-links ${isMenuOpen ? "active" : ""}`}>
+              <Link
+                to="/"
+                className={`nav-link ${location.pathname === "/" ? "active" : ""}`}
+              >
+                {t("nav.home")}
+              </Link>
+              <Link
+                to="/products"
+                className={`nav-link ${location.pathname === "/products" ? "active" : ""}`}
+              >
+                {t("nav.products")}
+              </Link>
+              <Link
+                to="/orders"
+                className={`nav-link ${location.pathname === "/orders" ? "active" : ""}`}
+              >
+                Buyurtmalar
+              </Link>
+              <Link
+                to="/about"
+                className={`nav-link ${location.pathname === "/about" ? "active" : ""}`}
+              >
+                {t("nav.about")}
+              </Link>
+              <Link
+                to="/contact"
+                className={`nav-link ${location.pathname === "/contact" ? "active" : ""}`}
+              >
+                {t("nav.contact")}
+              </Link>
             </div>
           </div>
         </div>

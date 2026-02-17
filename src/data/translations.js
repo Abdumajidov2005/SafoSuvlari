@@ -82,6 +82,47 @@ export const translations = {
         orders: "Buyurtmalar",
         wishlist: "Sevimlilar",
         cart: "Savat",
+        search_placeholder: "🔍 Mahsulot qidirish...",
+      },
+      auth: {
+        login: "Kirish",
+        register: "Ro'yxatdan o'tish",
+        full_name: "To'liq ism",
+        full_name_placeholder: "Ism Familiya",
+        phone: "Telefon (ixtiyoriy)",
+        phone_placeholder: "+998 90 123 45 67",
+        email: "Email",
+        email_placeholder: "email@example.com",
+        password: "Parol",
+        password_placeholder: "••••••••",
+        no_account: "Hisobingiz yo'qmi?",
+        has_account: "Allaqachon hisobingiz bormi?",
+      },
+      ru: {
+        nav: {
+          home: "Главная",
+          products: "Продукты",
+          about: "О Нас",
+          contact: "Контакты",
+          orders: "Заказы",
+          wishlist: "Избранное",
+          cart: "Корзина",
+          search_placeholder: "🔍 Поиск продуктов...",
+        },
+        auth: {
+          login: "Войти",
+          register: "Регистрация",
+          full_name: "Полное имя",
+          full_name_placeholder: "Имя Фамилия",
+          phone: "Телефон (необязательно)",
+          phone_placeholder: "+998 90 123 45 67",
+          email: "Email",
+          email_placeholder: "email@example.com",
+          password: "Пароль",
+          password_placeholder: "••••••••",
+          no_account: "Нет аккаунта?",
+          has_account: "Уже есть аккаунт?",
+        },
       },
     },
     contact: {
@@ -348,6 +389,21 @@ export const translations = {
       about: "Biz Haqimizda",
       contact: "Aloqa",
     },
+    auth: {
+      login: "Kirish",
+      register: "Ro'yxatdan o'tish",
+      full_name: "To'liq ism",
+      full_name_placeholder: "Ism Familiya",
+      phone: "Telefon (ixtiyoriy)",
+      phone_placeholder: "+998 90 123 45 67",
+      email: "Elektron pochta",
+      email_placeholder: "email@example.com",
+      password: "Parol",
+      password_placeholder: "••••••••",
+      no_account: "Hisobingiz yo'qmi?",
+      has_account: "Hisobingiz bormi?",
+    },
+
     data: {
       news: {
         1: {
@@ -722,6 +778,21 @@ export const translations = {
       about: "О нас",
       contact: "Контакты",
     },
+    auth: {
+      login: "Войти",
+      register: "Регистрация",
+      full_name: "Полное имя",
+      full_name_placeholder: "Имя Фамилия",
+      phone: "Телефон (необязательно)",
+      phone_placeholder: "+998 90 123 45 67",
+      email: "Электронная почта",
+      email_placeholder: "email@example.com",
+      password: "Пароль",
+      password_placeholder: "••••••••",
+      no_account: "Нет аккаунта?",
+      has_account: "Уже есть аккаунт?",
+    },
+
     data: {
       news: {
         1: {
@@ -1093,6 +1164,21 @@ export const translations = {
       orders: "Orders",
       about: "About Us",
       contact: "Contact",
+      search_placeholder: "🔍 Search products...",
+    },
+    auth: {
+      login: "Login",
+      register: "Register",
+      full_name: "Full Name",
+      full_name_placeholder: "Name Surname",
+      phone: "Phone (optional)",
+      phone_placeholder: "+998 90 123 45 67",
+      email: "Email",
+      email_placeholder: "email@example.com",
+      password: "Password",
+      password_placeholder: "••••••••",
+      no_account: "No account?",
+      has_account: "Already have an account?",
     },
     data: {
       news: {

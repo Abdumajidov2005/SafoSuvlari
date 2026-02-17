@@ -113,7 +113,7 @@ const AuthModal = ({ isOpen, onClose }) => {
               <div className="form-group">
                 <label htmlFor="full_name">
                   <User size={16} />
-                  To'liq ism
+                  {t("auth.full_name")}
                 </label>
                 <input
                   type="text"
@@ -121,7 +121,7 @@ const AuthModal = ({ isOpen, onClose }) => {
                   name="full_name"
                   value={formData.full_name}
                   onChange={handleInputChange}
-                  placeholder="Ism Familiya"
+                  placeholder={t("auth.full_name_placeholder")}
                   required={!isLogin}
                 />
               </div>
@@ -131,7 +131,7 @@ const AuthModal = ({ isOpen, onClose }) => {
               <div className="form-group">
                 <label htmlFor="phone">
                   <Mail size={16} />
-                  Telefon (ixtiyoriy)
+                  {t("auth.phone")}
                 </label>
                 <input
                   type="tel"
@@ -139,7 +139,7 @@ const AuthModal = ({ isOpen, onClose }) => {
                   name="phone"
                   value={formData.phone}
                   onChange={handleInputChange}
-                  placeholder="+998 90 123 45 67"
+                  placeholder={t("auth.phone_placeholder")}
                 />
               </div>
             )}
@@ -147,7 +147,7 @@ const AuthModal = ({ isOpen, onClose }) => {
             <div className="form-group">
               <label htmlFor="email">
                 <Mail size={16} />
-                Email
+                {t("auth.email")}
               </label>
               <input
                 type="email"
@@ -155,7 +155,7 @@ const AuthModal = ({ isOpen, onClose }) => {
                 name="email"
                 value={formData.email}
                 onChange={handleInputChange}
-                placeholder="email@example.com"
+                placeholder={t("auth.email_placeholder")}
                 required
               />
             </div>
@@ -163,7 +163,7 @@ const AuthModal = ({ isOpen, onClose }) => {
             <div className="form-group">
               <label htmlFor="password">
                 <Lock size={16} />
-                Parol
+                {t("auth.password")}
               </label>
               <div className="password-input-wrapper">
                 <input
@@ -172,7 +172,7 @@ const AuthModal = ({ isOpen, onClose }) => {
                   name="password"
                   value={formData.password}
                   onChange={handleInputChange}
-                  placeholder="••••••••"
+                  placeholder={t("auth.password_placeholder")}
                   required
                 />
                 <button
@@ -195,12 +195,12 @@ const AuthModal = ({ isOpen, onClose }) => {
               ) : isLogin ? (
                 <>
                   <LogIn size={16} />
-                  Kirish
+                  {t("auth.login")}
                 </>
               ) : (
                 <>
                   <UserPlus size={16} />
-                  Ro'yxatdan o'tish
+                  {t("auth.register")}
                 </>
               )}
             </button>
@@ -208,10 +208,10 @@ const AuthModal = ({ isOpen, onClose }) => {
 
           <div className="auth-switch">
             <span>
-              {isLogin ? "Hisobingiz yo'qmi?" : 'Allaqachon hisobingiz bormi?'}
+              {isLogin ? t("auth.no_account") : t("auth.has_account")}
             </span>
             <button type="button" onClick={switchMode} className="switch-btn">
-              {isLogin ? "Ro'yxatdan o'tish" : 'Kirish'}
+              {isLogin ? t("auth.register") : t("auth.login")}
             </button>
           </div>
         </div>

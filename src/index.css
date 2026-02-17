@@ -40,10 +40,10 @@
 }
 
 [data-theme="dark"] {
-  --primary: #3b82f6;
-  --primary-dark: #2563eb;
-  --primary-light: #60a5fa;
-  --accent: #22d3ee;
+  --primary: #6366f1;
+  --primary-dark: #4f46e5;
+  --primary-light: #818cf8;
+  --accent: #06b6d4;
 
   --text-primary: #f8fafc;
   --text-secondary: #cbd5e1;
@@ -142,8 +142,9 @@ a:hover {
   padding: 14px 28px;
   border: none;
   border-radius: var(--radius-sm);
-  font-size: 15px;
+  font-size: 17px;
   font-weight: 500;
+  letter-spacing: 1px;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;

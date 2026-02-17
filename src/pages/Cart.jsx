@@ -194,19 +194,19 @@ const Cart = () => {
                       id: Date.now().toString(),
                       items: cart,
                       total: total,
-                      status: 'confirmed',
-                      date: new Date().toISOString()
+                      status: "confirmed",
+                      date: new Date().toISOString(),
                     };
-                    
+
                     // Buyurtmani yaratish
                     createOrder(orderData);
-                    
+
                     // Cartni tozalash
                     clearCart();
-                    
+
                     // Modalni yopish
                     setShowCheckout(false);
-                    
+
                     // Orders ga o'tish
                     navigate("/orders");
                   }}
